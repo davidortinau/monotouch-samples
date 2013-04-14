@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
+    <Reference Include="MonoTouch.Dialog-1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -76,6 +77,7 @@
     <Folder Include="Screens\iPad\ViewTransitions\" />
     <Folder Include="Screens\iPad\LayerAnimation\" />
     <Folder Include="Resources\" />
+    <Folder Include="Resources\introSlideImages\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -127,6 +129,23 @@
     <Compile Include="Screens\iPad\LayerAnimation\ImplicitAnimationScreen.xib.designer.cs">
       <DependentUpon>ImplicitAnimationScreen.xib</DependentUpon>
     </Compile>
+    <Compile Include="Screens\iPad\NotificationViewController.cs" />
+    <Compile Include="Screens\iPad\NotificationViewController.designer.cs">
+      <DependentUpon>NotificationViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\iPad\AttractionLoopViewController.cs" />
+    <Compile Include="Screens\iPad\AttractionLoopViewController.designer.cs">
+      <DependentUpon>AttractionLoopViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\iPad\InfoGraphicViewController.cs" />
+    <Compile Include="Screens\iPad\InfoGraphicViewController.designer.cs">
+      <DependentUpon>InfoGraphicViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\UIColorExtensions.cs" />
+    <Compile Include="Screens\iPad\LittleBounceViewController.cs" />
+    <Compile Include="Screens\iPad\LittleBounceViewController.designer.cs">
+      <DependentUpon>LittleBounceViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Screens\iPad\BasicUIViewAnimation\BasicUIViewAnimationScreen.xib" xmlns="" />
@@ -135,6 +154,10 @@
     <InterfaceDefinition Include="Screens\iPad\ViewTransitions\BackTransitionViewController.xib" xmlns="" />
     <InterfaceDefinition Include="Screens\iPad\LayerAnimation\LayerAnimationScreen.xib" xmlns="" />
     <InterfaceDefinition Include="Screens\iPad\LayerAnimation\ImplicitAnimationScreen.xib" xmlns="" />
+    <InterfaceDefinition Include="Screens\iPad\NotificationViewController.xib" />
+    <InterfaceDefinition Include="Screens\iPad\AttractionLoopViewController.xib" />
+    <InterfaceDefinition Include="Screens\iPad\InfoGraphicViewController.xib" />
+    <InterfaceDefinition Include="Screens\iPad\LittleBounceViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\icon-72.png" />
@@ -153,6 +176,29 @@
     <BundleResource Include="Resources\icon-57.png" />
     <BundleResource Include="Resources\icon-114.png" />
     <BundleResource Include="Resources\icon-144.png" />
+    <BundleResource Include="Resources\introSlideImages\slide1\image.png" />
+    <BundleResource Include="Resources\introSlideImages\slide1\text.png" />
+    <BundleResource Include="Resources\introSlideImages\slide1\title.png" />
+    <BundleResource Include="Resources\introSlideImages\slide2\image.png" />
+    <BundleResource Include="Resources\introSlideImages\slide2\text.png" />
+    <BundleResource Include="Resources\introSlideImages\slide2\title.png" />
+    <BundleResource Include="Resources\introSlideImages\slide3\image.png" />
+    <BundleResource Include="Resources\introSlideImages\slide3\text.png" />
+    <BundleResource Include="Resources\introSlideImages\slide3\title.png" />
+    <BundleResource Include="Resources\introSlideImages\slide4\image.png" />
+    <BundleResource Include="Resources\introSlideImages\slide4\text.png" />
+    <BundleResource Include="Resources\introSlideImages\slide4\title.png" />
+    <BundleResource Include="Resources\introSlideImages\IntroBackground.png" />
+    <BundleResource Include="Resources\BuildTheGrid_bkg_1024.png" />
+    <BundleResource Include="Resources\btnClose_down.png" />
+    <BundleResource Include="Resources\btnClose_normal.png" />
+    <BundleResource Include="Resources\grid_builder_page_bkg.png" />
+    <BundleResource Include="Resources\slider_thumb.png" />
+    <BundleResource Include="Resources\Renewables.png" />
+    <BundleResource Include="Resources\ScrollThumb.png" />
+    <BundleResource Include="Resources\nav_about.png" />
+    <BundleResource Include="Resources\nav_connect.png" />
+    <BundleResource Include="Resources\nav_home.png" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="Resources\iTunesArtwork.png" />

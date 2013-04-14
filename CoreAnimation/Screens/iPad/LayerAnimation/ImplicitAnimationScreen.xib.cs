@@ -51,14 +51,15 @@ namespace Example_CoreAnimation.Screens.iPad.LayerAnimation
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			
-			
+
 			// anonymous delegate that runs when the btnAnimate button is clicked
 			this.btnAnimate.TouchUpInside += (s, e) => {
 			
 				// if you want to override the animation duration, you can:
 				//this.imgToAnimate.Layer.Duration = 1.0;
 			
+
+
 				if(imgLayer.Frame.Y == 70)
 				{
 					 imgLayer.Frame = new RectangleF (new PointF (200, 270), imgLayer.Frame.Size);
