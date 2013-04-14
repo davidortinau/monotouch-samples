@@ -112,23 +112,26 @@ namespace Example_CoreAnimation
 			var strokeColor = UIColor.FromRGB(red: 186, green: 220, blue: 232);
 			animationPath = new UIBezierPath ();
 			animationPath.MoveTo( new PointF(240,214) );
-			animationPath.MoveTo( new PointF(188,234) );
-			animationPath.MoveTo( new PointF(225,292) );
+			animationPath.AddLineTo( new PointF(188,234) );
+			animationPath.AddLineTo( new PointF(225,292) );
 			animationPath.AddCurveToPoint( new PointF(227,300), controlPoint1: new PointF(226,294), controlPoint2: new PointF(227,296));
 			animationPath.AddCurveToPoint( new PointF(227,305), controlPoint1: new PointF(227,302), controlPoint2: new PointF(227,304));
-			animationPath.MoveTo( new PointF(227,341) );
-			animationPath.MoveTo( new PointF(227,343) );
+			animationPath.AddLineTo( new PointF(227,341) );
+			animationPath.AddLineTo( new PointF(227,343) );
 			animationPath.AddCurveToPoint( new PointF(229,348), controlPoint1: new PointF(228,345), controlPoint2: new PointF(228,346));
 			animationPath.AddCurveToPoint( new PointF(239,349), controlPoint1: new PointF(230,351), controlPoint2: new PointF(234,352));
 			animationPath.AddCurveToPoint( new PointF(256,339), controlPoint1: new PointF(248,344), controlPoint2: new PointF(253,341));
 			animationPath.AddCurveToPoint( new PointF(260,335), controlPoint1: new PointF(258,338), controlPoint2: new PointF(260,336));
-			animationPath.MoveTo( new PointF(261,333) );
-			animationPath.MoveTo( new PointF(261,412) );
+			animationPath.AddLineTo( new PointF(261,333) );
+			animationPath.AddLineTo( new PointF(261,412) );
 			animationPath.AddCurveToPoint( new PointF(269,438), controlPoint1: new PointF(261,424), controlPoint2: new PointF(263,433));
 			animationPath.AddCurveToPoint( new PointF(294,445), controlPoint1: new PointF(274,442), controlPoint2: new PointF(282,445));
-			animationPath.MoveTo( new PointF(738,445) );
-			animationPath.LineWidth = 4;
+			animationPath.AddLineTo( new PointF(738,445) );
+
+			animationPath.UsesEvenOddFillRule = true;
+
 			strokeColor.SetStroke();
+			animationPath.LineWidth = 4;
 			animationPath.Stroke();
 		}
 
