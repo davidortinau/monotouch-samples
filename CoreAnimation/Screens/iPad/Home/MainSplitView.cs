@@ -22,7 +22,8 @@ namespace Example_CoreAnimation.Screens.iPad.Home
 		{
 			// create our master and detail views
 			masterView = new Screens.iPad.NavTable.MasterNavTableViewController ();
-			detailView = new Screens.iPad.BasicUIViewAnimation.BasicUIViewAnimationScreen ();
+//			detailView = new Screens.iPad.BasicUIViewAnimation.BasicUIViewAnimationScreen ();
+			detailView = new NotificationViewController();
 
 			// create an array of controllers from them and then assign it to the 
 			// controllers property

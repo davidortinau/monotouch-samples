@@ -7,12 +7,15 @@ using MonoTouch.UIKit;
 using Example_CoreAnimation.Screens.iPad;
 using MonoTouch.CoreAnimation;
 using System.Timers;
+using V2DRuntime.Tween;
 
 namespace Example_CoreAnimation
 {
 	public partial class LittleBounceViewController : UIViewController, IDetailView
 	{
 		UIToolbar tlbrMain;
+
+		UIButton btn;
 
 		UIView sidebarMenu;
 		CALayer navHome;
@@ -47,12 +50,23 @@ namespace Example_CoreAnimation
 				
 			};
 			timer.Start();
+
+			addListeners();
 		}
 
 		void draw ()
 		{
 			createToolbar();
 			createMenu();
+			createButton ();
+		}
+
+		void createButton ()
+		{
+			btn = new UIButton (UIButtonType.RoundedRect);
+			btn.SetTitle ("Replay", UIControlState.Normal);
+			btn.Frame = new RectangleF ((View.Bounds.Width * 0.5f) - 100, (View.Bounds.Height * 0.5f) - 20, 200, 40);
+			this.View.AddSubview (btn);
 		}
 
 		void createMenu ()
@@ -89,7 +103,7 @@ namespace Example_CoreAnimation
 
 			var homeIn = new CAKeyFrameAnimation {
 				KeyPath = "position.x",
-				Duration = 1,
+				Duration = 1.4,
 				BeginTime = localMediaTime,
 				FillMode = CAFillMode.Forwards,
 				RemovedOnCompletion = false,
@@ -102,7 +116,7 @@ namespace Example_CoreAnimation
 
 			var aboutIn = new CAKeyFrameAnimation {
 				KeyPath = "position.x",
-				Duration = 1,
+				Duration = 1.4,
 				BeginTime = localMediaTime + 0.3,
 				FillMode = CAFillMode.Forwards,
 				RemovedOnCompletion = false,
@@ -115,7 +129,7 @@ namespace Example_CoreAnimation
 
 			var connectIn = new CAKeyFrameAnimation {
 				KeyPath = "position.x",
-				Duration = 1,
+				Duration = 1.4,
 				BeginTime = localMediaTime + 0.6,
 				FillMode = CAFillMode.Forwards,
 				RemovedOnCompletion = false,
@@ -132,6 +146,7 @@ namespace Example_CoreAnimation
 
 		}
 
+		// Func<float, float, float, float> easingEquation
 		NSObject[] createBounceValues ()
 		{
 			int steps = 100;
@@ -139,9 +154,14 @@ namespace Example_CoreAnimation
 			double value = 0;
 			float fromValue = -295;// not used yet
 			float toValue = 0;
-			float e = 2.71f;
+
+			float curTime = 0;
 			for (int t = 0; t < steps; t++) {
-				value = fromValue * Math.Pow(e, -0.055*t) * Math.Cos(0.08*t) + toValue;
+				curTime = (float)t / (float)steps;
+				var easingFactor = Easing.EaseInElastic(curTime, 0, 1);
+				value = (toValue - fromValue) * easingFactor + fromValue;
+				Console.WriteLine("curTime " + curTime + " | " + value);
+
 				values[t] = NSNumber.FromDouble(value);
 			}
 			return values;
@@ -154,6 +174,21 @@ namespace Example_CoreAnimation
 			};
 			View.AddSubview( tlbrMain );
 			
+		}
+
+		void addListeners ()
+		{
+			btn.TouchUpInside += replay;
+		}
+
+		void replay (object sender, EventArgs e)
+		{
+			UIView.AnimationsEnabled = false;
+			navHome.Frame = new RectangleF(new PointF(-295, navHome.Frame.Y), navHome.Frame.Size);
+			navAbout.Frame = new RectangleF(new PointF(-295, navAbout.Frame.Y), navAbout.Frame.Size);
+			navConnect.Frame = new RectangleF(new PointF(-295, navConnect.Frame.Y), navConnect.Frame.Size);
+
+			transitionIn();
 		}
 
 		/// <summary>
