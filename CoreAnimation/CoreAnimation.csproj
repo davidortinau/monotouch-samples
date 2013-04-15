@@ -81,8 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
-    <None Include="TweenState.cs" />
-    <None Include="TweenWorker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDelegate.cs" />
@@ -149,6 +147,7 @@
       <DependentUpon>LittleBounceViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Easing.cs" />
+    <Compile Include="TweenBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Screens\iPad\BasicUIViewAnimation\BasicUIViewAnimationScreen.xib" xmlns="" />

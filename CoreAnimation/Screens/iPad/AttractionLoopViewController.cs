@@ -202,14 +202,7 @@ namespace Example_CoreAnimation
 		
 		void transitionOut ()
 		{
-			
-			Console.WriteLine("transitionOut");
-			
-			Console.WriteLine("Out Length " + textImage.AnimationKeys.Length);
-			
 			var localMediaTime = CAAnimation.CurrentMediaTime();
-			
-			Console.WriteLine("Title X Out " + titleImage.PresentationLayer.Position.X);
 			
 			var titleAnim = CABasicAnimation.FromKeyPath("position.x");
 			titleAnim.Duration = 1;

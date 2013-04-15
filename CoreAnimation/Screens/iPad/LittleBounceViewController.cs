@@ -101,6 +101,8 @@ namespace Example_CoreAnimation
 			// timing is unnecessary since it'll be linear
 			var localMediaTime = CAAnimation.CurrentMediaTime();
 
+			NSObject[] keyframes = TweenBuilder.CreateKeyValues(-295, 0, Easing.EaseOutBounce);
+
 			var homeIn = new CAKeyFrameAnimation {
 				KeyPath = "position.x",
 				Duration = 1.4,
@@ -108,7 +110,7 @@ namespace Example_CoreAnimation
 				FillMode = CAFillMode.Forwards,
 				RemovedOnCompletion = false,
 				TimingFunction = CAMediaTimingFunction.FromName( CAMediaTimingFunction.Linear ),
-				Values = createBounceValues()
+				Values = keyframes
 			};
 
 //			navHome.Frame = new RectangleF(new PointF(0,navHome.Frame.Y), navHome.Frame.Size);
@@ -121,7 +123,7 @@ namespace Example_CoreAnimation
 				FillMode = CAFillMode.Forwards,
 				RemovedOnCompletion = false,
 				TimingFunction = CAMediaTimingFunction.FromName( CAMediaTimingFunction.Linear ),
-				Values = createBounceValues()
+				Values = keyframes
 			};
 			
 //			navAbout.Frame = new RectangleF(new PointF(0,navAbout.Frame.Y), navAbout.Frame.Size);
@@ -134,7 +136,7 @@ namespace Example_CoreAnimation
 				FillMode = CAFillMode.Forwards,
 				RemovedOnCompletion = false,
 				TimingFunction = CAMediaTimingFunction.FromName( CAMediaTimingFunction.Linear ),
-				Values = createBounceValues()
+				Values = keyframes
 			};
 			
 //			navConnect.Frame = new RectangleF(new PointF(0,navConnect.Frame.Y), navConnect.Frame.Size);
@@ -144,27 +146,6 @@ namespace Example_CoreAnimation
 
 
 
-		}
-
-		// Func<float, float, float, float> easingEquation
-		NSObject[] createBounceValues ()
-		{
-			int steps = 100;
-			NSObject[] values = new NSObject[steps];
-			double value = 0;
-			float fromValue = -295;// not used yet
-			float toValue = 0;
-
-			float curTime = 0;
-			for (int t = 0; t < steps; t++) {
-				curTime = (float)t / (float)steps;
-				var easingFactor = Easing.EaseInElastic(curTime, 0, 1);
-				value = (toValue - fromValue) * easingFactor + fromValue;
-				Console.WriteLine("curTime " + curTime + " | " + value);
-
-				values[t] = NSNumber.FromDouble(value);
-			}
-			return values;
 		}
 
 		void createToolbar ()

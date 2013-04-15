@@ -5,6 +5,8 @@ using System.Text;
 
 namespace V2DRuntime.Tween
 {
+	public delegate float EasingFormula(float t, float start, float length);
+
 	// easing equations from the ever brilliant Robert Penner
 	public class Easing
 	{
