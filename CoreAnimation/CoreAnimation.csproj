@@ -78,6 +78,7 @@
     <Folder Include="Screens\iPad\LayerAnimation\" />
     <Folder Include="Resources\" />
     <Folder Include="Resources\introSlideImages\" />
+    <Folder Include="Resources\discButtons\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -148,6 +149,15 @@
     </Compile>
     <Compile Include="Easing.cs" />
     <Compile Include="TweenBuilder.cs" />
+    <Compile Include="Screens\iPad\ExplicitCustom.cs" />
+    <Compile Include="Screens\iPad\PieChartLayer.cs" />
+    <Compile Include="Screens\iPad\DemoViewController.cs" />
+    <Compile Include="Screens\iPad\Demo.cs" />
+    <Compile Include="Screens\iPad\DemoAttribute.cs" />
+    <Compile Include="Screens\iPad\BuildViewController.designer.cs">
+      <DependentUpon>GlowPulseViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\iPad\GlowPulseViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Screens\iPad\BasicUIViewAnimation\BasicUIViewAnimationScreen.xib" xmlns="" />
@@ -201,6 +211,12 @@
     <BundleResource Include="Resources\nav_about.png" />
     <BundleResource Include="Resources\nav_connect.png" />
     <BundleResource Include="Resources\nav_home.png" />
+    <BundleResource Include="Resources\discButtons\button1_small.png" />
+    <BundleResource Include="Resources\discButtons\button2_small.png" />
+    <BundleResource Include="Resources\discButtons\button3_small.png" />
+    <BundleResource Include="Resources\discButtons\button4_small.png" />
+    <BundleResource Include="Resources\discButtons\button5_small.png" />
+    <BundleResource Include="Resources\discButtons\button5_small_glow.png" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="Resources\iTunesArtwork.png" />

@@ -1,8 +1,6 @@
 using System;
 using MonoTouch.UIKit;
 
-namespace Example_CoreAnimation
-{
 	public static class UIColorExtensions
 	{
 		public static UIColor FromHex(this UIColor color,int hexValue)
@@ -14,5 +12,3 @@ namespace Example_CoreAnimation
 				);
 		}
 	}
-}
-
