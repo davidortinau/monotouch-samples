@@ -42,10 +42,7 @@ namespace Example_CoreAnimation
 		
 		public override void DidReceiveMemoryWarning ()
 		{
-			// Releases the view if it doesn't have a superview.
 			base.DidReceiveMemoryWarning ();
-			
-			// Release any cached data, images, etc that aren't in use.
 		}
 		
 		public override void ViewDidLoad ()
@@ -59,6 +56,11 @@ namespace Example_CoreAnimation
 		public override void ViewWillAppear (bool animated)
 		{
 			base.ViewWillAppear (animated);
+		}
+
+		public override void ViewDidAppear (bool animated)
+		{
+			base.ViewDidAppear (animated);
 
 			playingAnimation = true;
 			transitionIn();
@@ -69,6 +71,10 @@ namespace Example_CoreAnimation
 			base.ViewWillDisappear (animated);
 
 			playingAnimation = false;
+			timer.Stop ();
+			titleImage.RemoveAllAnimations();
+			featureImage.RemoveAllAnimations();
+			textImage.RemoveAllAnimations();
 		}
 		
 		void buildUI ()
@@ -245,9 +251,11 @@ namespace Example_CoreAnimation
 		
 		void cycleSlides ()
 		{
-			currentImage++;
-			createSlide();
-			transitionIn();
+			if(playingAnimation){
+				currentImage++;
+				createSlide();
+				transitionIn();
+			}
 		}
 
 		/// <summary>

@@ -16,7 +16,7 @@ namespace Example_CoreAnimation
 		UIToolbar tlbrMain;
 
 		UISlider slider;
-		CAShapeLayer dot;
+//		CAShapeLayer dot;
 
 		UIView infoGraphic;
 		Timer timer;
@@ -44,7 +44,15 @@ namespace Example_CoreAnimation
 			base.ViewDidLoad ();
 
 			buildUI();
+			addListeners();
 			startTimer();
+		}
+
+		public override void ViewWillDisappear (bool animated)
+		{
+			base.ViewWillDisappear (animated);
+
+			timer.Stop();
 		}
 
 		void buildUI ()
@@ -53,6 +61,16 @@ namespace Example_CoreAnimation
 			createInfoGraphic();
 			createSlider();
 			createPath();
+//			DrawPathAsBackground();
+		}
+
+		void addListeners ()
+		{
+			slider.ValueChanged += (object sender, EventArgs e) => {
+//				Console.WriteLine("slider " + slider.Value);
+				timer.Interval = 2000 - (1800*slider.Value);
+				timer.Start();
+			};
 		}
 
 		void startTimer ()
@@ -109,31 +127,6 @@ namespace Example_CoreAnimation
 
 		void createPath ()
 		{
-//			var strokeColor = UIColor.FromRGB(red: 186, green: 220, blue: 232);
-//			animationPath = new UIBezierPath ();
-//			animationPath.MoveTo( new PointF(240,214) );
-//			animationPath.AddLineTo( new PointF(188,234) );
-//			animationPath.AddLineTo( new PointF(225,292) );
-//			animationPath.AddCurveToPoint( new PointF(227,300), controlPoint1: new PointF(226,294), controlPoint2: new PointF(227,296));
-//			animationPath.AddCurveToPoint( new PointF(227,305), controlPoint1: new PointF(227,302), controlPoint2: new PointF(227,304));
-//			animationPath.AddLineTo( new PointF(227,341) );
-//			animationPath.AddLineTo( new PointF(227,343) );
-//			animationPath.AddCurveToPoint( new PointF(229,348), controlPoint1: new PointF(228,345), controlPoint2: new PointF(228,346));
-//			animationPath.AddCurveToPoint( new PointF(239,349), controlPoint1: new PointF(230,351), controlPoint2: new PointF(234,352));
-//			animationPath.AddCurveToPoint( new PointF(256,339), controlPoint1: new PointF(248,344), controlPoint2: new PointF(253,341));
-//			animationPath.AddCurveToPoint( new PointF(260,335), controlPoint1: new PointF(258,338), controlPoint2: new PointF(260,336));
-//			animationPath.AddLineTo( new PointF(261,333) );
-//			animationPath.AddLineTo( new PointF(261,412) );
-//			animationPath.AddCurveToPoint( new PointF(269,438), controlPoint1: new PointF(261,424), controlPoint2: new PointF(263,433));
-//			animationPath.AddCurveToPoint( new PointF(294,445), controlPoint1: new PointF(274,442), controlPoint2: new PointF(282,445));
-//			animationPath.AddLineTo( new PointF(738,445) );
-//
-//			animationPath.UsesEvenOddFillRule = true;
-//
-//			strokeColor.SetStroke();
-//			animationPath.LineWidth = 4;
-//			animationPath.Stroke();
-
 			//// Color Declarations
 			UIColor color = UIColor.FromRGBA(0.678f, 0.831f, 0.887f, 1.000f);
 			
@@ -201,25 +194,34 @@ namespace Example_CoreAnimation
 
 		void addDot ()
 		{
-			dot = new CAShapeLayer();
+			var dot = new CAShapeLayer();
 			dot.Path = UIBezierPath.FromOval( new RectangleF(-10, 10, 20, 20) ).CGPath;
 			dot.FillColor = UIColor.Clear.FromHex(0xFAA851).CGColor;
 			dot.LineWidth = 0;
 
 			infoGraphic.Layer.AddSublayer( dot );
 
-			animateDot();
+			animateDot(dot);
 		}
 
-		void animateDot ()
+		void animateDot (CAShapeLayer dot)
 		{
 			CAKeyFrameAnimation keyFrameAnimation = (CAKeyFrameAnimation)CAKeyFrameAnimation.FromKeyPath ("position");
 			keyFrameAnimation.Path =  animationPath.CGPath;
 			keyFrameAnimation.Duration = 5;
 			keyFrameAnimation.CalculationMode = CAKeyFrameAnimation.AnimationPaced;
 			keyFrameAnimation.FillMode = CAFillMode.Forwards;
+			keyFrameAnimation.RemovedOnCompletion = true;
 			
 			keyFrameAnimation.TimingFunction = CAMediaTimingFunction.FromName (CAMediaTimingFunction.Linear);
+
+			keyFrameAnimation.AnimationStopped += (object sender, CAAnimationStateEventArgs e) => {
+				Console.WriteLine("REMOVE");
+				infoGraphic.Layer.Sublayers[0].RemoveFromSuperLayer();
+//				((CAShapeLayer)sender).RemoveFromSuperLayer();
+//				((CAShapeLayer)sender).Dispose();
+
+			};
 			
 			dot.AddAnimation (keyFrameAnimation, "MoveImage");
 			dot.Position = new PointF (222, 326);
@@ -227,11 +229,10 @@ namespace Example_CoreAnimation
 
 		void onTimerElapsed (object sender, ElapsedEventArgs e)
 		{
-			Console.WriteLine("onTimerElapsed");
 			InvokeOnMainThread( ()=>{
 				addDot();
 			});
-			timer.Stop();
+//			timer.Stop();
 		}
 
 		/// <summary>

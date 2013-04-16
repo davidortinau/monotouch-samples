@@ -12,6 +12,7 @@ namespace Example_CoreAnimation
 	{
 		UIView notification;
 		UIButton btn;
+		UIButton closeBtn;
 
 		UIToolbar tlbrMain;
 
@@ -64,6 +65,19 @@ namespace Example_CoreAnimation
 			label.BackgroundColor = UIColor.Clear;
 			label.TextColor = UIColor.White;
 			notification.AddSubview (label);
+
+			closeBtn = new UIButton (UIButtonType.Custom);
+			closeBtn.SetImage( UIImage.FromBundle("btnClose_normal.png"), UIControlState.Normal );
+			closeBtn.SetImage( UIImage.FromBundle("btnClose_down.png"), UIControlState.Selected );
+			closeBtn.Frame = new RectangleF (notification.Frame.Width - 80, (notification.Bounds.Height * 0.5f) - 37, 74, 74);
+			closeBtn.TouchUpInside += (object sender, EventArgs e) => {
+				Console.WriteLine("close it");
+				toggleNotification(sender, e);
+			};
+
+			notification.AddSubview (closeBtn);
+
+
 			
 			this.View.AddSubview (notification);
 		}
@@ -78,39 +92,56 @@ namespace Example_CoreAnimation
 		
 		void toggleNotification (object sender, EventArgs e)
 		{
-			
-			if (notification.Frame.Y < 0) {
-				UIView.Animate (
-					duration: 4, 
-					delay: 0, 
-					options: UIViewAnimationOptions.CurveEaseIn, 
-					animation: () => {
-						notification.Frame = new RectangleF (new PointF (0, 0), notification.Frame.Size);
-					},
-					completion: ()=>{
-//						UIView.Animate(1, 0, UIViewAnimationOptions.Repeat, ()=>{
-//							notification.BackgroundColor = UIColor.Red;
-//						}, null);
-					}
-				);
+			Console.WriteLine("toggle");
 
-				UIView.Animate (
-					duration: 0.4, 
-					delay: 10, 
-					options: UIViewAnimationOptions.CurveEaseOut, 
-					animation: () => {
-						notification.Frame = new RectangleF (new PointF (0, -60), notification.Frame.Size);
-					}, 
-					completion: null
-				);
+			if (notification.Layer.PresentationLayer.Frame.Y < 0) {
+				UIView.Animate (0.8, 0, UIViewAnimationOptions.CurveEaseIn | UIViewAnimationOptions.AllowUserInteraction, () => {
+					notification.Frame = new RectangleF (new PointF (0, 0), notification.Frame.Size);					
+				}, 
+				()=>{
+					UIView.Animate(1, 0, UIViewAnimationOptions.Autoreverse | UIViewAnimationOptions.AllowUserInteraction, ()=>{
+						notification.BackgroundColor = UIColor.Red;
+					}, ()=>{
+						notification.BackgroundColor = UIColor.DarkGray;
+						UIView.Animate (
+							duration: 0.4, 
+							delay: 4, 
+							options: UIViewAnimationOptions.CurveEaseOut | UIViewAnimationOptions.AllowUserInteraction, 
+							animation: () => {
+								notification.Frame = new RectangleF (new PointF (0, -60), notification.Frame.Size);
+							}, 
+							completion:null
+						);
+					});
+				});
+
+				// Animation blocks can be nested, but sequentially you'll get unexpected behavior
+				// also any interaction within the box with the button while animations are pending doesn't work without doing a hittest
+				// using the presentationlayer
+
 				
 			} else {
-				UIView.Animate (0.4, 0, UIViewAnimationOptions.CurveEaseOut, () => {
+				Console.WriteLine("kill last animation");
+				notification.Layer.RemoveAllAnimations();
+				notification.Frame = new RectangleF (new PointF (0, 0), notification.Frame.Size);
+				UIView.Animate (1.2, 0, UIViewAnimationOptions.CurveEaseOut, () => {
 					notification.Frame = new RectangleF (new PointF (0, -60), notification.Frame.Size);
 				}, 
 				null);
 			}
 			
+		}
+
+		public override void TouchesBegan (NSSet touches, UIEvent evt)
+		{
+			base.TouchesBegan (touches, evt);
+
+			UITouch touch = touches.AnyObject as UITouch;
+			var touchPoint = touch.LocationInView(View);
+			if(closeBtn.Layer.PresentationLayer.HitTest(touchPoint) != null){
+				toggleNotification(null, null);
+			}
+
 		}
 
 		/// <summary>
