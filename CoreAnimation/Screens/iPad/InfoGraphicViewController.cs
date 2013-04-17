@@ -57,17 +57,18 @@ namespace Example_CoreAnimation
 
 		void buildUI ()
 		{
-			createToolbar();
-			createInfoGraphic();
-			createSlider();
-			createPath();
-//			DrawPathAsBackground();
+			if(infoGraphic == null){
+				createInfoGraphic();
+				createToolbar();
+				createSlider();
+				createPath();
+	//			DrawPathAsBackground();
+			}
 		}
 
 		void addListeners ()
 		{
 			slider.ValueChanged += (object sender, EventArgs e) => {
-//				Console.WriteLine("slider " + slider.Value);
 				timer.Interval = 2000 - (1800*slider.Value);
 				timer.Start();
 			};
@@ -94,13 +95,7 @@ namespace Example_CoreAnimation
 
 		void createInfoGraphic ()
 		{
-			infoGraphic = new UIView( new RectangleF( 0, 0, 768, 571) );
-
-//			var bg = new CALayer();
-//			bg.Contents = UIImage.FromBundle("Renewables.png").CGImage;
-//			bg.Frame = new RectangleF(0, 0, bg.Contents.Width, bg.Contents.Height);
-//			infoGraphic.Layer.AddSublayer( bg );
-
+			infoGraphic = new UIView( new RectangleF( 0, 44, 768, 571) );
 			infoGraphic.Layer.Contents = UIImage.FromBundle("Renewables.png").CGImage;
 
 			View.AddSubview( infoGraphic );
@@ -109,7 +104,7 @@ namespace Example_CoreAnimation
 		void createSlider ()
 		{
 			slider = new UISlider {
-				Frame = new RectangleF(500, 330, 250, 40),
+				Frame = new RectangleF(500, 374, 250, 40),
 				MaximumTrackTintColor = UIColor.Black,
 				MinimumTrackTintColor = UIColor.Clear.FromHex(0xFAA851),
 				MinValue = 0,
@@ -216,10 +211,9 @@ namespace Example_CoreAnimation
 			keyFrameAnimation.TimingFunction = CAMediaTimingFunction.FromName (CAMediaTimingFunction.Linear);
 
 			keyFrameAnimation.AnimationStopped += (object sender, CAAnimationStateEventArgs e) => {
-				Console.WriteLine("REMOVE");
-				infoGraphic.Layer.Sublayers[0].RemoveFromSuperLayer();
-//				((CAShapeLayer)sender).RemoveFromSuperLayer();
-//				((CAShapeLayer)sender).Dispose();
+				var oldBall = infoGraphic.Layer.Sublayers[0];
+				oldBall.RemoveFromSuperLayer();
+				oldBall.Dispose();
 
 			};
 			

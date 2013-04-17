@@ -92,15 +92,14 @@ namespace Example_CoreAnimation
 		
 		void toggleNotification (object sender, EventArgs e)
 		{
-			Console.WriteLine("toggle");
-
 			if (notification.Layer.PresentationLayer.Frame.Y < 0) {
+
 				UIView.Animate (0.8, 0, UIViewAnimationOptions.CurveEaseIn | UIViewAnimationOptions.AllowUserInteraction, () => {
 					notification.Frame = new RectangleF (new PointF (0, 0), notification.Frame.Size);					
 				}, 
 				()=>{
 					UIView.Animate(1, 0, UIViewAnimationOptions.Autoreverse | UIViewAnimationOptions.AllowUserInteraction, ()=>{
-						notification.BackgroundColor = UIColor.Red;
+						notification.BackgroundColor = UIColor.Clear.FromHex(0xfaa850);
 					}, ()=>{
 						notification.BackgroundColor = UIColor.DarkGray;
 						UIView.Animate (

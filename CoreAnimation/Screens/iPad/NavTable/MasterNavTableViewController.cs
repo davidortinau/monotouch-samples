@@ -53,8 +53,10 @@ namespace Example_CoreAnimation.Screens.iPad.NavTable
 			caGroup.Items.Add (new NavItem ("Infographic", "", typeof (InfoGraphicViewController)));
 			caGroup.Items.Add (new NavItem ("Little Bounce", "", typeof (LittleBounceViewController)));
 
-//			NavItemGroup overtimeGroup = new NavItemGroup("Overtime");
-//			navItems.Add( overtimeGroup );
+
+			NavItemGroup overtimeGroup = new NavItemGroup("Overtime");
+			navItems.Add( overtimeGroup );
+			overtimeGroup.Items.Add (new NavItem ("Rotation", "", typeof (RotationViewController)));
 //			overtimeGroup.Items.Add (new NavItem ("Custom Property", "", typeof (Presentation.AnimationPresentation.ExplicitCustom)));
 
 			

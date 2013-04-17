@@ -99,7 +99,7 @@ namespace Example_CoreAnimation
 
 		void createBackground ()
 		{
-			var bg = UIImage.FromBundle("introSlideImages/introBackground.png");
+			var bg = UIImage.FromBundle("introSlideImages/IntroBackground.png");
 			View.Layer.Contents = bg.CGImage;
 		}
 
