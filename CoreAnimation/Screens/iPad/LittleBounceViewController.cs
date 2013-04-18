@@ -13,6 +13,7 @@ namespace Example_CoreAnimation
 {
 	public partial class LittleBounceViewController : UIViewController, IDetailView
 	{
+
 		UIToolbar tlbrMain;
 
 		UIButton btn;

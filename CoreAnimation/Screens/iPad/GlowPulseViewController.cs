@@ -86,7 +86,7 @@ namespace Example_CoreAnimation
 		{
 			menuBar = new UIView {
 				Frame = new RectangleF( 300, 90, 668, 100),
-				BackgroundColor = UIColor.Clear.FromHex(0x0173b0)
+				BackgroundColor = UIColor.Clear.FromHex(0x666666)
 			};
 
 			menuBar.Layer.ShadowColor = UIColor.DarkGray.CGColor;
