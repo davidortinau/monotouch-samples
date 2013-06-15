@@ -162,10 +162,6 @@
     <Compile Include="Screens\iPad\RotationViewController.designer.cs">
       <DependentUpon>RotationViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Screens\iPad\BendViewController.cs" />
-    <Compile Include="Screens\iPad\BendViewController.designer.cs">
-      <DependentUpon>BendViewController.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Screens\iPad\BasicUIViewAnimation\BasicUIViewAnimationScreen.xib" xmlns="" />
@@ -179,7 +175,6 @@
     <InterfaceDefinition Include="Screens\iPad\InfoGraphicViewController.xib" />
     <InterfaceDefinition Include="Screens\iPad\LittleBounceViewController.xib" />
     <InterfaceDefinition Include="Screens\iPad\RotationViewController.xib" />
-    <InterfaceDefinition Include="Screens\iPad\BendViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\icon-72.png" />

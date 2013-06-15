@@ -1,8 +1,6 @@
 using System;
-using MonoTouch.UIKit;
 using System.Drawing;
 using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
 using MonoTouch.Foundation;
 
 namespace Presentation.AnimationPresentation
